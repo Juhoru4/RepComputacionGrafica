@@ -1,0 +1,19 @@
+/*
+Css es para que la pagina sea bonita
+*/
+
+*{  /* el * significa que se aplica a todos los elementos del documento, un estilo universal */
+    background-color: #1F1D80;
+    color: #8EE3DE;
+}
+
+/* etiqueta con atributo: id = # */
+#navbar{ 
+    color: white;
+}
+
+/* etiqueta con atributo: class = . */
+.classTest{
+    background-color: #F95738;
+
+}
