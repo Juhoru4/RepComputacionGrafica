@@ -37,7 +37,7 @@ importacion de fuentes
 
 
 /*---------
-Configuracion General
+Configuracion Global
 ---------*/
 *{   /* el * significa que se aplica a todos los elementos del documento, un estilo universal */
     box-sizing: border-box;
@@ -52,7 +52,7 @@ Configuracion General
     --color-black: #0D0705;
     --font-display: 'Spoof Trial Thin';
     --font-body: 'Roobert Medium';
-    --section-padding: 8rem 4rem;
+    --section-padding: 3rem 8rem;
 }
 
 section h1, section h2, section h3, section h4, section h5, section h6 {
@@ -74,11 +74,11 @@ Navbar
 #navbar .navbar{ 
     background-color: var(--color-pink) !important;
     font-family: "Spoof Trial Thin";
-    --bs-navbar-active-color: #fff9f7c8;
+    --bs-navbar-active-color: var(--color-white);
     --bs-navbar-color: var(--color-white); /*color del texto de los otros links*/
-    --bs-navbar-hover-color: #fff9f7c8;
+    --bs-navbar-hover-color: var(--color-white);
     --bs-navbar-brand-color: var(--color-white); /*color del texto al aldo del logo*/
-    --bs-navbar-brand-hover-color: #fff9f7c8; 
+    --bs-navbar-brand-hover-color: var(--color-white); 
     --bs-navbar-brand-margin-end: -15rem; /*para lograr centrar los links*/
 }
 
@@ -92,6 +92,27 @@ Banner
     --text-color: var(--color-black);
 }
 
+.btn{
+    --bs-btn-color: var(--color-white);
+    --bs-btn-bg: var(--color-pink);
+    --bs-btn-border-color: var(--color-pink);
+    --bs-btn-hover-color: var(--color-white);
+    --bs-btn-hover-bg: var(--color-pink);
+    --bs-btn-hover-border-color: var(--color-pink);
+    --bs-btn-active-bg: var(--color-pink);
+    --bs-btn-active-border-color: var(--color-white);
+    --bs-btn-font-family: var(--font-display);
+}
 
+
+/*---------
+Cards
+---------*/
+#cards{
+    padding: var(--section-padding);
+    --title-color: var(--color-white);
+    --text-color: var(--color-white);
+    background-color: var(--color-blue)
+}
 
 
