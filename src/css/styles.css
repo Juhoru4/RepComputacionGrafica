@@ -2,18 +2,96 @@
 Css es para que la pagina sea bonita
 */
 
-*{  /* el * significa que se aplica a todos los elementos del documento, un estilo universal */
-    background-color: #1F1D80;
-    color: #8EE3DE;
+
+
+/* etiqueta con atributo: id=estilo -> #estilo{ */
+/* etiqueta con atributo: class=estilo -> .estilo{ */
+
+
+
+/*---------
+importacion de fuentes
+---------*/
+@import url(https://db.onlinewebfonts.com/c/215107c04d97667966f3b627c9e79860?family=Spoof+Trial+Thin);
+@font-face {
+    font-family: "Spoof Trial Thin";
+    src: url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.eot");
+    src: url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.svg#Spoof Trial Thin")format("svg");
 }
 
-/* etiqueta con atributo: id = # */
-#navbar{ 
-    color: white;
+@import url(https://db.onlinewebfonts.com/c/fdd7abd88b9d820ffbf7108209dba1ce?family=Roobert+Medium);
+@font-face {
+    font-family: "Roobert Medium";
+    src: url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.eot");
+    src: url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.svg#Roobert Medium")format("svg");
 }
 
-/* etiqueta con atributo: class = . */
-.classTest{
-    background-color: #F95738;
 
+
+/*---------
+Configuracion General
+---------*/
+*{   /* el * significa que se aplica a todos los elementos del documento, un estilo universal */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+:root {
+    --color-pink: #F5018E;
+    --color-blue: #2932D9;
+    --color-white: #FFF9F7;
+    --color-black: #0D0705;
+    --font-display: 'Spoof Trial Thin';
+    --font-body: 'Roobert Medium';
+    --section-padding: 8rem 4rem;
+}
+
+section h1, section h2, section h3, section h4, section h5, section h6 {
+    color: var(--title-color);
+    font-family: var(--font-display);
+}
+
+section p {
+    color: var(--text-color);
+    font-family: var(--font-body);
+}
+
+
+
+/*---------
+Navbar
+---------*/
+
+#navbar .navbar{ 
+    background-color: var(--color-pink) !important;
+    font-family: "Spoof Trial Thin";
+    --bs-navbar-active-color: #fff9f7c8;
+    --bs-navbar-color: var(--color-white); /*color del texto de los otros links*/
+    --bs-navbar-hover-color: #fff9f7c8;
+    --bs-navbar-brand-color: var(--color-white); /*color del texto al aldo del logo*/
+    --bs-navbar-brand-hover-color: #fff9f7c8; 
+    --bs-navbar-brand-margin-end: -15rem; /*para lograr centrar los links*/
+}
+
+
+/*---------
+Banner 
+---------*/
+#banner{
+    padding: var(--section-padding);
+    --title-color: var(--color-blue);
+    --text-color: var(--color-black);
+}
+
+
+
+
