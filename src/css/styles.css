@@ -3,16 +3,13 @@ Css es para que la pagina sea bonita
 */
 
 
-
 /* etiqueta con atributo: id=estilo -> #estilo{ */
 /* etiqueta con atributo: class=estilo -> .estilo{ */
-
 
 
 /*---------
 importacion de fuentes
 ---------*/
-@import url(https://db.onlinewebfonts.com/c/215107c04d97667966f3b627c9e79860?family=Spoof+Trial+Thin);
 @font-face {
     font-family: "Spoof Trial Thin";
     src: url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.eot");
@@ -23,7 +20,6 @@ importacion de fuentes
     url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.svg#Spoof Trial Thin")format("svg");
 }
 
-@import url(https://db.onlinewebfonts.com/c/fdd7abd88b9d820ffbf7108209dba1ce?family=Roobert+Medium);
 @font-face {
     font-family: "Roobert Medium";
     src: url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.eot");
@@ -108,7 +104,7 @@ Banner
 /*---------
 Cards
 ---------*/
-#cards{
+#cards_section{
     padding: var(--section-padding);
     --title-color: var(--color-white);
     --text-color: var(--color-white);
