@@ -46,6 +46,7 @@ Configuracion Global
     --color-blue: #2932D9;
     --color-white: #FFF9F7;
     --color-black: #0D0705;
+    --color-grey: #e3dadb;
     --font-display: 'Spoof Trial Thin';
     --font-body: 'Roobert Medium';
     --section-padding: 3rem 8rem;
@@ -112,7 +113,7 @@ Cards
 }
 
 #cards{
-    background-color: var(--color-white);
+    background-color: var(--color-grey);
     --title-color: var(--color-black);
     --text-color: var(--color-black);
     border: none;
