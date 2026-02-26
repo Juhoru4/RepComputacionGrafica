@@ -11,11 +11,26 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 
-//firts geometry shape
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x2932D9 } );
-const cube = new THREE.Mesh( geometry, material );
+//First geometry shape CUBE
+const geometryCube = new THREE.BoxGeometry( 1, 1, 1 );
+const materialCube = new THREE.MeshBasicMaterial( { color: 0x2932D9, wireframe: true } );
+const cube = new THREE.Mesh( geometryCube, materialCube );
+cube.position.x = -2;
 scene.add( cube );
+
+//second geometry shape TORUS
+const geometryTorus = new THREE.TorusGeometry( 0.5, 0.2, 16, 15 );
+const materialTorus = new THREE.MeshBasicMaterial( { color: 0xF5018E, wireframe: true } );
+const torus = new THREE.Mesh( geometryTorus, materialTorus );
+scene.add( torus );
+
+//Third geometry shape CONE
+const geometryCone = new THREE.ConeGeometry( 0.5, 1, 10 );
+const materialCone = new THREE.MeshBasicMaterial( { color: 0x0D0705, wireframe: true } );
+const cone = new THREE.Mesh(geometryCone, materialCone );
+cone.position.x = 2;
+scene.add( cone );
+
 
 
 //OrbitControls
@@ -36,6 +51,13 @@ camera.position.y = 2;
 function animate( time ) {
   cube.rotation.x = time / 2000;
   cube.rotation.y = time / 1000;
+
+  torus.rotation.x = time / 2000;
+  torus.rotation.y = time / 1000;
+
+  cone.rotation.x = time / 2000;
+  cone.rotation.y = time / 1000;
+
   controls.update();
   renderer.render( scene, camera );
 }

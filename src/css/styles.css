@@ -111,4 +111,16 @@ Cards
     background-color: var(--color-blue)
 }
 
+#cards{
+    background-color: var(--color-white);
+    --title-color: var(--color-black);
+    --text-color: var(--color-black);
+    border: none;
+}
+
+.card-deck{
+    display: flex;
+    gap: 20px;/* espacio entre cards */
+    flex-wrap: wrap;/* permite que bajen si no caben */
+}
 
