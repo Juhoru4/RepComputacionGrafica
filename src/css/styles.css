@@ -125,3 +125,14 @@ Cards
     flex-wrap: wrap;/* permite que bajen si no caben */
 }
 
+
+/*---------
+CardForm
+---------*/
+.cardForm{
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    margin-top: 2%;
+    margin-left: 2%;
+}

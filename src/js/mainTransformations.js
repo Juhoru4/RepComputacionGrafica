@@ -12,11 +12,13 @@ document.body.appendChild( renderer.domElement );
 
 
 //First geometry shape CUBE
+
 const geometryCube = new THREE.BoxGeometry( 1, 1, 1 );
 const materialCube = new THREE.MeshBasicMaterial( { color: 0x2932D9, wireframe: true } );
-const cube = new THREE.Mesh( geometryCube, materialCube );
+const cube = new THREE.Mesh(geometryCube, materialCube );
 cube.position.x = -2;
 scene.add( cube );
+
 
 //second geometry shape TORUS
 const geometryTorus = new THREE.TorusGeometry( 0.5, 0.2, 16, 15 );
