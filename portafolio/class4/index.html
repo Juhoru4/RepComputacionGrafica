@@ -52,7 +52,7 @@
 
 
     <section>
-        <div class="cardForm">
+        <div id="inputs-cube" class="cardForm">
             <div class="card-header">
                 Featured
             </div>
@@ -60,17 +60,21 @@
                 <form>
                     <div class="mb-3">
                         <label for="x" class="form-label">x (width):</label>
-                        <input type="number" class="form-control" id="x" aria-describedby="xHelp">
+                        <input type="number" class="form-control form-control-sm" id="x" value="1" aria-describedby="xHelp">
                     </div>
                     <div class="mb-3">
                         <label for="y" class="form-label">y (height):</label>
-                        <input type="number" class="form-control" id="y" aria-describedby="yHelp">
+                        <input type="number" class="form-control form-control-sm" id="y" value="1" aria-describedby="yHelp">
                     </div>
                     <div class="mb-3">
                         <label for="z" class="form-label">z (depth):</label>
-                        <input type="number" class="form-control" id="z" aria-describedby="zHelp">
+                        <input type="number" class="form-control form-control-sm" id="z" value="1" aria-describedby="zHelp">
                     </div>
-                    <button onclick="createObject()" class="btn btn-primary">Create</button>
+                    <div class="mb-3">
+                        <label for="objectColor" class="form-label fw-bold">Color:</label>
+                        <input type="color" class="form-control form-control-color w-100" id="objectColor" value="#007bff">
+                    </div>
+                    <button type="button" id="btnCreate" class="btn btn-primary">Create</button>
                 </form>
             </div>
         </div>
