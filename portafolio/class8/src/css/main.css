@@ -71,10 +71,10 @@ html, body {
 
 model-viewer {
     width: 100vw; /* 100% of the viewport width */
-    height: 80vh; /* Ajusta la altura si se corta el modelo */
+    height: 90vh; /* Ajusta la altura si se corta el modelo */
     display: block;
     /* margin-top: -8rem sube el modelo sobre el espacio vacío del título */
-    margin: -1rem auto 0 auto; 
+    margin: 0 rem auto 0 auto; 
     border: none;
     outline: none;
     position: relative;
@@ -176,6 +176,7 @@ model-viewer {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    margin-left: 2rem;
   }
 
   .slide {
