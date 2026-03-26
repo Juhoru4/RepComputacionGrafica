@@ -26,8 +26,6 @@
 </head>
 
 <body>
-    
-
     <!--
     navbar
     -->
@@ -50,19 +48,63 @@
 
             </div>
         </nav>
-    
     </section>
 
+
     <section>
+
         <!-- Use it like any other HTML element -->
-        <model-viewer alt="Scene 3d" src="./src/models/glb/scene.glb" ar shadow-intensity="1" camera-controls
+        <model-viewer 
+            alt="Scene 3d"
+            src="./src/models/glb/scene.glb"
+            ar shadow-intensity="1" 
+            camera-controls
             touch-action="pan-y">
+
+            <button slot="ar-button" id="ar-button">
+                View in your space
+            </button>
+            
+            <button id="ar-failure">
+                AR is not tracking!
+            </button>
+            
+            <div class="slider">
+                <div class="slides">
+                    <button class="slide selected" onclick="switchSrc(this, 'item')"
+                        style="background-image: url('./src/img/itemImage.png');">
+                    </button>
+                    <button class="slide" onclick="switchSrc(this, 'player')" 
+                        style="background-image: url('./src/img/girlImage.png');">
+                    </button>
+                    <button class="slide" onclick="switchSrc(this, 'scene')" 
+                        style="background-image: url('./src/img/sceneImage.png');">
+                    </button>
+                </div>
+            </div>
         </model-viewer>
+
+        <script type="module">
+        const modelViewer = document.querySelector("model-viewer");
+
+        window.switchSrc = (element, name) => {
+            const base = "./src/models/glb/" + name;
+            modelViewer.src = base + '.glb';
+            const slides = document.querySelectorAll(".slide");
+            slides.forEach((element) => { element.classList.remove("selected"); });
+            element.classList.add("selected");
+        };
+
+        document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+            // Keep slider interactions from affecting the XR scene.
+            ev.preventDefault();
+        });
+    </script>
+
     </section
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
 </body>
 </html>
