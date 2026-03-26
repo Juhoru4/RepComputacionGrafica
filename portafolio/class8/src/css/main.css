@@ -1,12 +1,3 @@
-/*
-Css es para que la pagina sea bonita
-*/
-
-
-/* etiqueta con atributo: id=estilo -> #estilo{ */
-/* etiqueta con atributo: class=estilo -> .estilo{ */
-
-
 /*---------
 importacion de fuentes
 ---------*/
@@ -30,8 +21,6 @@ importacion de fuentes
     url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.svg#Roobert Medium")format("svg");
 }
 
-
-
 /*---------
 Configuracion Global
 ---------*/
@@ -52,18 +41,6 @@ Configuracion Global
     --section-padding: 3rem 8rem;
 }
 
-section h1, section h2, section h3, section h4, section h5, section h6 {
-    color: var(--title-color);
-    font-family: var(--font-display);
-}
-
-section p {
-    color: var(--text-color);
-    font-family: var(--font-body);
-}
-
-
-
 /*---------
 Navbar
 ---------*/
@@ -80,59 +57,20 @@ Navbar
 }
 
 
-/*---------
-Banner 
----------*/
-#banner{
-    padding: var(--section-padding);
-    --title-color: var(--color-blue);
-    --text-color: var(--color-black);
-}
-
-.btn{
-    --bs-btn-color: var(--color-white);
-    --bs-btn-bg: var(--color-pink);
-    --bs-btn-border-color: var(--color-pink);
-    --bs-btn-hover-color: var(--color-white);
-    --bs-btn-hover-bg: var(--color-pink);
-    --bs-btn-hover-border-color: var(--color-pink);
-    --bs-btn-active-bg: var(--color-pink);
-    --bs-btn-active-border-color: var(--color-white);
-    --bs-btn-font-family: var(--font-display);
-}
 
 
 /*---------
-Cards
+Visualizar modelos
 ---------*/
-#cards_section{
-    padding: var(--section-padding);
-    --title-color: var(--color-white);
-    --text-color: var(--color-white);
-    background-color: var(--color-blue)
-}
-
-#cards{
-    background-color: var(--color-grey);
-    --title-color: var(--color-black);
-    --text-color: var(--color-black);
-    border: none;
-}
-
-.card-deck{
-    display: flex;
-    gap: 20px;/* espacio entre cards */
-    flex-wrap: wrap;/* permite que bajen si no caben */
-}
-
-
-/*---------
-CardForm
----------*/
-.cardForm{
-    width: 15%;
+html, body {
+    width: 100%;
     height: 100%;
-    position: absolute;
-     margin-top: 1%;
-    margin-left: 1%;
+    background-color: beige;
+    overflow: hidden; /* Prevents scrolling when in full screen */
+}
+
+model-viewer {
+    width: 100vw; /* 100% of the viewport width */
+    height: 100vh; /* 100% of the viewport height */
+    border: none;
 }
