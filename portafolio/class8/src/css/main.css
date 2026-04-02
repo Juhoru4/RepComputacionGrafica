@@ -12,13 +12,13 @@ importacion de fuentes
 }
 
 @font-face {
-    font-family: "Roobert Medium";
-    src: url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.eot");
-    src: url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/fdd7abd88b9d820ffbf7108209dba1ce.svg#Roobert Medium")format("svg");
+    font-family: "Spoof Trial Medium";
+    src: url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.eot");
+    src: url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.svg#Spoof Trial Medium")format("svg");
 }
 
 /*---------
@@ -32,12 +32,12 @@ Configuracion Global
 
 :root {
     --color-pink: #F5018E;
-    --color-blue: #2932D9;
+    --color-blue: #012446;
     --color-white: #FFF9F7;
     --color-black: #0D0705;
     --color-grey: #e3dadb;
     --font-display: 'Spoof Trial Thin';
-    --font-body: 'Roobert Medium';
+    --font-body: 'Spoof Trial Medium';
     --section-padding: 3rem 8rem;
 }
 
@@ -70,16 +70,29 @@ html, body {
 }
 
 model-viewer {
-    width: 100vw; /* 100% of the viewport width */
-    height: 90vh; /* Ajusta la altura si se corta el modelo */
-    display: block;
-    /* margin-top: -8rem sube el modelo sobre el espacio vacío del título */
-    margin: 0 rem auto 0 auto; 
-    border: none;
-    outline: none;
-    position: relative;
-    z-index: 1; /* Lo mantiene por debajo o encima del brillo según prefieras */
+  width: 100vw; /* 100% of the viewport width */
+  height: 90vh; /* Ajusta la altura si se corta el modelo */
+  display: block; /* margin-top: -8rem sube el modelo sobre el espacio vacío del título */
+  margin: 0 rem auto 0 auto;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1; /* Lo mantiene por debajo o encima del brillo según prefieras */
 }
+
+
+
+.name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 5rem;
+  color: var(--color-blue);
+  font-family: var(--font-body);
+}
+
 
 
 /******************************/
@@ -206,3 +219,12 @@ model-viewer {
   .slide:focus-visible {
     outline: 1px solid var(--color-pink);
   }
+
+
+
+
+
+
+
+
+  
