@@ -1,0 +1,156 @@
+
+/*---------
+importacion de fuentes
+---------*/
+
+@font-face {
+    font-family: "Spoof Trial Thin";
+    src: url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.eot");
+    src: url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/215107c04d97667966f3b627c9e79860.svg#Spoof Trial Thin")format("svg");
+}
+
+@font-face {
+    font-family: "Spoof Trial Medium";
+    src: url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.eot");
+    src: url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/7586c62eeaf3a5d2c12c19144c4f410f.svg#Spoof Trial Medium")format("svg");
+}
+
+/*---------
+Configuracion Global
+---------*/
+
+*{   
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	font-family: 'Spoof Trial Thin';
+}
+
+
+:root {
+    --color-pink: #F5018E;
+    --color-blue: #012446;
+    --color-white: #FFF9F7;
+    --color-black: #0D0705;
+    --color-grey: #e3dadb;
+    --font-display: 'Spoof Trial Thin';
+    --font-body: 'Spoof Trial Medium';
+    --section-padding: 3rem 8rem;
+	--hud-opacity: rgba(153, 113, 255, 0.415);
+}
+
+/*---------
+Navbar
+---------*/
+
+#navbar .navbar{ 
+    background-color: var(--color-pink) !important;
+    font-family: "Spoof Trial Thin";
+    --bs-navbar-active-color: var(--color-white);
+    --bs-navbar-color: var(--color-white); 
+    --bs-navbar-hover-color: var(--color-white);
+    --bs-navbar-brand-color: var(--color-white); 
+    --bs-navbar-brand-hover-color: var(--color-white); 
+    --bs-navbar-brand-margin-end: -15rem; 
+}
+
+
+
+
+
+
+
+
+
+
+.menuSection {
+    background-color: var(--color-white);
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+/* EFFECT 2: THE HUD FRAME */
+.hud-frame {
+    position: relative;
+    padding: 30px 50px;
+    background: rgba(196, 245, 255, 0.2);
+    border: 1px solid rgba(5, 0, 164, 0.307);
+    backdrop-filter: blur(5px);
+}
+
+/* EFFECT 3: TACTICAL BRACKETS */
+.bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--color-pink);
+}
+.tl { top: -5px; left: -5px; border-right: 0; border-bottom: 0; }
+.tr { top: -5px; right: -5px; border-left: 0; border-bottom: 0; }
+.bl { bottom: -5px; left: -5px; border-right: 0; border-top: 0; }
+.br { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
+
+/* EFFECT 4: STAGGERED BOOT-UP */
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nav-list li {
+    opacity: 0;
+    transform: scale(0.8);
+    /* Multiplies the delay by the --i variable from HTML */
+    animation: boot-sequence 0.4s ease forwards calc(var(--i) * 0.15s);
+}
+
+@keyframes boot-sequence {
+    to { opacity: 1; transform: scale(1); }
+}
+
+.nav-link {
+    color: var(--color-pink);
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    display: block;
+    position: relative;
+}
+
+/* EFFECT 5: THE RADAR PING HOVER */
+.nav-link:hover {
+    text-shadow: 0 0 15px var(--color-pink);
+    padding-left: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+    .hud-frame {
+        width: 90vw;
+        padding: 20px;
+    }
+    .nav-list {
+        flex-direction: row; /* Switch to horizontal on mobile */
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .nav-link {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+}
