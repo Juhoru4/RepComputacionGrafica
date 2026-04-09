@@ -111,6 +111,7 @@ Menu de inicio
     display: flex;
     flex-direction: column;
     gap: 20px;
+
 }
 
 .nav-list li {
