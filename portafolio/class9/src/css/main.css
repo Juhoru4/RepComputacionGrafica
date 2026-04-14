@@ -47,6 +47,21 @@ Configuracion Global
 	--hud-opacity: rgba(153, 113, 255, 0.415);
 }
 
+h1, h2, h3, h4, h5 {
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 2rem;
+  margin-right: 2rem;
+  color: var(--color-blue);
+  font-family: var(--font-body);
+}
+
+
+
+
+
+
 /*---------
 Navbar
 ---------*/
@@ -165,7 +180,220 @@ Menu de inicio
 
 
 
-
 /*---------
-Jugo nuevo
+Eleccion de personaje
 ---------*/
+.chooseCharacter {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-white);
+    overflow: hidden; /* Prevents scrolling when in full screen */
+}
+
+model-viewer {
+  width: 100vw; /* 100% of the viewport width */
+  height: 90vh; /* Ajusta la altura si se corta el modelo */
+  display: block; /* margin-top: -8rem sube el modelo sobre el espacio vacío del título */
+  margin: 0 rem auto 0 auto;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1; /* Lo mantiene por debajo o encima del brillo según prefieras */
+}
+
+
+
+.name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 5rem;
+  color: var(--color-pink);
+  font-family: var(--font-body);
+}
+
+
+
+/******************************/
+/* This keeps child nodes hidden while the element loads */
+  :not(:defined) > * {
+    display: none;
+  }
+
+  model-viewer {
+    overflow-x: hidden;
+  }
+
+  #ar-button {
+    background-image: url(../img/btn.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 132px;
+    padding: 0px 16px 0px 40px;
+    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color:var(--color-pink);
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+  }
+
+  #ar-button:active {
+    background-color: #E8EAED;
+  }
+
+  #ar-button:focus {
+    outline: none;
+  }
+
+  #ar-button:focus-visible {
+    outline: 1px solid var(--color-pink);
+  }
+
+  @keyframes circle {
+    from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+  }
+
+  @keyframes elongate {
+    from { transform: translateX(100px); }
+    to   { transform: translateX(-100px); }
+  }
+
+  model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+  }
+
+  model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+  }
+
+  model-viewer > #ar-prompt > img {
+    animation: circle 4s linear infinite;
+  }
+
+  model-viewer > #ar-failure {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 175px;
+    display: none;
+  }
+
+  model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+    display: block;
+  }
+
+  .slider {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    bottom: 16px;
+  }
+
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    margin-left: 2rem;
+  }
+
+  .slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+  }
+
+  .slide.selected {
+    border: 2px solid var(--color-pink);
+  }
+
+  .slide:focus {
+    outline: none;
+  }
+
+  .slide:focus-visible {
+    outline: 1px solid var(--color-pink);
+  }
+
+
+
+
+  /*---------
+seccion settings/configuracion
+---------*/
+
+.settings {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-white);
+}
+
+/* Contenedor del control */
+#volumenControl {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 8px;
+    background: var(--color-grey);
+    border-radius: 10px;
+    outline: none;
+    transition: 0.2s;
+}
+
+/* Barra al pasar el mouse */
+#volumenControl:hover {
+    background: var(--color-pink);
+}
+
+/* Thumb (la bolita) */
+#volumenControl::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--color-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Hover del thumb */
+#volumenControl::-webkit-slider-thumb:hover {
+    background: var(--color-pink);
+    transform: scale(1.2);
+}
+
+/* Firefox */
+#volumenControl::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--color-blue);
+    border-radius: 50%;
+    cursor: pointer;
+}
