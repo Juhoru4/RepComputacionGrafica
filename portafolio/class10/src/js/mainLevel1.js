@@ -37,12 +37,12 @@ camera.position.x = 0;
 
 
 const description = {
-    Orbit: 'OrbitControls: Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para visualizar modelos 3D.',
-    Fly: 'FlyControls: Permite volar a través de la escena con movimientos suaves. Es ideal para simulaciones de vuelo o exploración en primera persona.',
-    FirstPerson: 'FirstPersonControls: Simula el movimiento de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos o experiencias inmersivas.',
-    PointerLock: 'PointerLockControls: Similar a FirstPersonControls pero requiere que el usuario haga clic para bloquear el cursor, proporcionando una experiencia de control total. Es ideal para juegos en primera persona.',
-    Trackball: 'TrackballControls: Similar a OrbitControls pero con una sensación de control más fluida, como si estuvieras manipulando una bola de control. Es excelente para exploración libre.',
-    Transform: 'TransformControls: Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o herramientas de diseño.'
+    Orbit: 'Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para visualizar modelos 3D.',
+    Fly: 'Permite volar a través de la escena con movimientos suaves. Es ideal para simulaciones de vuelo o exploración en primera persona.',
+    FirstPerson: 'Simula el movimiento de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos o experiencias inmersivas.',
+    PointerLock: 'Similar a FirstPersonControls pero requiere que el usuario haga clic para bloquear el cursor, proporcionando una experiencia de control total. Es ideal para juegos en primera persona.',
+    Trackball: 'Similar a OrbitControls pero con una sensación de control más fluida, como si estuvieras manipulando una bola de control. Es excelente para exploración libre.',
+    Transform: 'Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o herramientas de diseño.'
 };  
 
 const controlMap = {
@@ -77,10 +77,17 @@ function animate( time ) {
 }
 
 
+//UI
+const titleElement = document.getElementById('control-title');
+const descriptionElement = document.getElementById('control-desc');
 
 function setControls(key) {
+
+  //alert(`Selected control: ${key}`);
+
     // Lógica para establecer los controles
-    alert(`Cambiando a ${key} Controls`);
+    titleElement.textContent = `${key} Controls`;
+    descriptionElement.textContent = description[key];
 }
 
 
