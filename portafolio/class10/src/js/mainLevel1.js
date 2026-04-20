@@ -19,6 +19,7 @@ import { TransformControls } from 'three/addons/controls/TransformControls.js';
 
 const timer = new THREE.Timer();
 timer.connect( document );
+const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xe3dadb); //e3dadb
@@ -54,6 +55,8 @@ const controlMap = {
     Transform: new TransformControls( camera, renderer.domElement )
 };  
 
+let activeControl = controlMap.Orbit;
+
 // Configuración inicial de los controles
 controlMap.Fly.movementSpeed = 5;
 controlMap.Fly.rollSpeed = Math.PI / 24;
@@ -71,7 +74,11 @@ stats.domElement.style.top = '0px';
 document.body.appendChild( stats.domElement );
 
 function animate( time ) {
+  const delta = clock.getDelta();
   timer.update();
+  if ( activeControl && typeof activeControl.update === 'function' ) {
+    activeControl.update( delta );
+  }
   stats.update();
   renderer.render( scene, camera );
 }
@@ -82,12 +89,25 @@ const titleElement = document.getElementById('control-title');
 const descriptionElement = document.getElementById('control-desc');
 
 function setControls(key) {
-
-  //alert(`Selected control: ${key}`);
-
     // Lógica para establecer los controles
     titleElement.textContent = `${key} Controls`;
     descriptionElement.textContent = description[key];
+
+  Object.entries(controlMap).forEach(([name, control]) => {
+    if ( 'enabled' in control ) {
+      control.enabled = name === key;
+    }
+  });
+
+  if ( activeControl && activeControl !== controlMap[key] && typeof activeControl.unlock === 'function' ) {
+    activeControl.unlock();
+  }
+
+  activeControl = controlMap[key] || controlMap.Orbit;
+
+  if ( activeControl && typeof activeControl.lock === 'function' && key === 'PointerLock' ) {
+    activeControl.lock();
+  }
 }
 
 
