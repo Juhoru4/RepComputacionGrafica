@@ -430,3 +430,22 @@ panel new game
     font-size: 14px;
     line-height: 1.4;
 }
+
+#Instructions {
+    position: absolute;
+    bottom: 300px;
+    width: 300px;
+    color: var(--color-black);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+    display: none; /* Se muestra solo en modo PointerLock */
+}
+
+
+#Instructions h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}

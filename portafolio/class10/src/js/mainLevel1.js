@@ -13,8 +13,43 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { TransformControls } from 'three/addons/controls/TransformControls.js';
 
+
 // -----------------------------------------------------------------------------
-// 1) TIEMPO Y RENDIMIENTO
+// 1) ESCENA, CAMARA Y RENDERER
+// -----------------------------------------------------------------------------
+// Escena principal donde se agregan todos los objetos 3D.
+const scene = new THREE.Scene();
+scene.background = new THREE.Color( 0xe3dadb );
+
+// Camara en perspectiva.
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+// Renderer WebGL que dibuja la escena en el canvas.
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setAnimationLoop( animate );
+document.body.appendChild( renderer.domElement );
+
+// Posicion inicial para ver la escena desde un angulo elevado.
+camera.position.set( 0, 2.5, 18 ); //x, y, z
+
+
+
+
+
+// Objeto principal que vamos a modificar en las transformaciones
+const boxMesh = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshStandardMaterial({ color: 0xff0055 })
+);
+boxMesh.position.set(0, 1, 3.5);
+scene.add(boxMesh);
+
+
+
+
+// -----------------------------------------------------------------------------
+// 2) TIEMPO Y RENDIMIENTO
 // -----------------------------------------------------------------------------
 // Timer y Clock se usan en cada frame para actualizar controles y animaciones.
 const timer = new THREE.Timer();
@@ -25,25 +60,6 @@ const stats = new Stats();
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.top = '0px';
 document.body.appendChild( stats.domElement );
-
-// -----------------------------------------------------------------------------
-// 2) ESCENA, CAMARA Y RENDERER
-// -----------------------------------------------------------------------------
-// Escena principal donde se agregan todos los objetos 3D.
-const scene = new THREE.Scene();
-scene.background = new THREE.Color( 0xe3dadb );
-
-// Camara en perspectiva.
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-// Posicion inicial para ver la escena desde un angulo elevado.
-camera.position.set( 0, 2.5, 18 ); //x, y, z
-
-// Renderer WebGL que dibuja la escena en el canvas.
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
 
 
 // -----------------------------------------------------------------------------
@@ -69,39 +85,53 @@ const controlMap = {
   Transform: new TransformControls( camera, renderer.domElement )
 };
 
-// Control activo por defecto.
-let activeControl = controlMap.Orbit;
-
 // Configuracion base de velocidad y sensibilidad.
 controlMap.Fly.movementSpeed = 5;
 controlMap.Fly.rollSpeed = Math.PI / 24;
 controlMap.FirstPerson.movementSpeed = 5;
 controlMap.FirstPerson.lookSpeed = 0.1;
+controlMap.Transform.attach(boxMesh); // Asociamos el TransformControls al boxMesh
 
 // Elementos HTML donde se muestra el nombre y la descripcion del control.
+let activeControl = controlMap.Orbit; //Control activo por defecto.
 const titleElement = document.getElementById( 'control-title' );
 const descriptionElement = document.getElementById( 'control-desc' );
+const instruccionDIV = document.getElementById('instruccionDIV'); // Para instrucciones adicionales (ej: PointerLock)
 
 // Cambia entre controles, habilita/deshabilita y gestiona lock/unlock cuando aplica.
 function setControls( key ) {
-  titleElement.textContent = `${key} Controls`;
-  descriptionElement.textContent = description[key];
+  // Lógica para establecer los controles
 
-  Object.entries( controlMap ).forEach( ( [name, control] ) => {
-    if ( 'enabled' in control ) {
-      control.enabled = name === key;
+  // Apagar todos los controles
+    Object.keys(controlMap).forEach(controlKey => {
+        const control = controlMap[controlKey];
+        if(control.enabled !== undefined) control.enabled = false; // Para controles que tienen enabled
+        
+        if(controlKey === 'Transform') scene.remove(control.getHelper()); // Para TransformControls, lo removemos de la escena (removemos el helper que es lo que se ve)
+    });
+
+    activeControl = key;
+    const active = controlMap[key];
+
+    // PANTALLA DE INSTRUCCIONES (instruccionDIV) ** Pendiente
+    
+    // Cambiamos el texto del título y la descripción (Inferior izquierda)
+    titleElement.textContent = `${key} Controls`;
+    descriptionElement.textContent = description[key] || 'Descripción no disponible.';
+    
+
+    // Logica para activar el control seleccionado
+    if(key === 'Transform') {
+        scene.add(active.getHelper()); 
+        active.enabled = true;
+        controlMap.Orbit.enabled = false;
+    }  else if (key === 'PointerLock') {
+        // No se activa automáticamente, el usuario debe hacer clic para bloquear el cursor
+    } else {
+        if(active.enabled !== undefined) active.enabled = true; // Activamos el control seleccionado    
     }
-  } );
 
-  if ( activeControl && activeControl !== controlMap[key] && typeof activeControl.unlock === 'function' ) {
-    activeControl.unlock();
-  }
-
-  activeControl = controlMap[key] || controlMap.Orbit;
-
-  if ( activeControl && typeof activeControl.lock === 'function' && key === 'PointerLock' ) {
-    activeControl.lock();
-  }
+    // Para la opcion de firstperson debemos capturar el pointer lock
 }
 
 // -----------------------------------------------------------------------------
@@ -216,7 +246,7 @@ cameraFolderRotation.open();
 // Selector de script/control activo para la camara.
 const cameraFolderControls = gui.addFolder( 'Camera Controls' );
 cameraFolderControls
-  .add( { Script: 'Orbit' }, 'Script', ['Orbit', 'Trackball', 'Fly', 'FirstPerson', 'PointerLock'] )
+  .add( { Script: 'Orbit' }, 'Script', ['Orbit', 'Trackball', 'Fly', 'FirstPerson', 'PointerLock', 'Transform'] )
   .onChange( setControls );
 cameraFolderControls.open();
 
@@ -231,16 +261,21 @@ setControls( 'Orbit' );
 // 6) LOOP DE ANIMACION Y EVENTOS
 // -----------------------------------------------------------------------------
 // Se ejecuta en cada frame: actualiza controles, helpers, stats y render.
-function animate( time ) {
-  const delta = timer.getDelta();
-  timer.update();
+function animate() {
 
-  if ( activeControl && typeof activeControl.update === 'function' ) {
-    activeControl.update( delta );
-  }
+    timer.update();
+    stats.update();
 
-  stats.update();
-  renderer.render( scene, camera );
+    const delta = timer.getDelta();
+
+    // Actualizamos los controles activos
+    if(activeControl === 'Orbit') controlMap.Orbit.update();
+    if(activeControl === 'Trackball') controlMap.Trackball.update();
+    if(activeControl === 'Fly') controlMap.Fly.update(delta); // El valor es el delta time, ajusta según sea necesario
+    if(activeControl === 'FirstPerson') controlMap.FirstPerson.update(delta);
+
+    // PointerLockControls no necesita actualización en el loop, se maneja con eventos de mouse
+    renderer.render(scene, camera);
 }
 
 // Mantiene proporcion correcta cuando cambia el tamano de la ventana.
