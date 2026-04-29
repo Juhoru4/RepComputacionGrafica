@@ -96,7 +96,17 @@ controlMap.Transform.attach(boxMesh); // Asociamos el TransformControls al boxMe
 let activeControl = controlMap.Orbit; //Control activo por defecto.
 const titleElement = document.getElementById( 'control-title' );
 const descriptionElement = document.getElementById( 'control-desc' );
-const instruccionDIV = document.getElementById('instruccionDIV'); // Para instrucciones adicionales (ej: PointerLock)
+const instructionsElement = document.getElementById( 'instructions' ); // Instrucciones para PointerLock
+
+// Estado de movimiento usado por PointerLock.
+const pointerVelocity = new THREE.Vector3();
+const pointerDirection = new THREE.Vector3();
+const pointerKeys = {
+  w: false,
+  a: false,
+  s: false,
+  d: false
+};
 
 // Cambia entre controles, habilita/deshabilita y gestiona lock/unlock cuando aplica.
 function setControls( key ) {
@@ -113,7 +123,9 @@ function setControls( key ) {
     activeControl = key;
     const active = controlMap[key];
 
-    // PANTALLA DE INSTRUCCIONES (instruccionDIV) ** Pendiente
+    if ( instructionsElement ) {
+      instructionsElement.style.display = key === 'PointerLock' ? 'block' : 'none';
+    }
     
     // Cambiamos el texto del título y la descripción (Inferior izquierda)
     titleElement.textContent = `${key} Controls`;
@@ -126,13 +138,32 @@ function setControls( key ) {
         active.enabled = true;
         controlMap.Orbit.enabled = false;
     }  else if (key === 'PointerLock') {
-        // No se activa automáticamente, el usuario debe hacer clic para bloquear el cursor
+      // No se activa automáticamente, el usuario debe hacer clic para bloquear el cursor
+      if ( active.enabled !== undefined ) active.enabled = true;
     } else {
         if(active.enabled !== undefined) active.enabled = true; // Activamos el control seleccionado    
     }
 
     // Para la opcion de firstperson debemos capturar el pointer lock
 }
+
+// Captura del cursor solo cuando PointerLock está activo.
+renderer.domElement.addEventListener( 'click', () => {
+  if ( activeControl === 'PointerLock' ) {
+    controlMap.PointerLock.lock();
+  }
+} );
+
+// Movimiento WASD para PointerLock.
+window.addEventListener( 'keydown', event => {
+  const key = event.key.toLowerCase();
+  if ( key in pointerKeys ) pointerKeys[key] = true;
+} );
+
+window.addEventListener( 'keyup', event => {
+  const key = event.key.toLowerCase();
+  if ( key in pointerKeys ) pointerKeys[key] = false;
+} );
 
 // -----------------------------------------------------------------------------
 // 4) CARGA DEL MODELO 3D (GLTF + DRACO)
@@ -273,6 +304,21 @@ function animate() {
     if(activeControl === 'Trackball') controlMap.Trackball.update();
     if(activeControl === 'Fly') controlMap.Fly.update(delta); // El valor es el delta time, ajusta según sea necesario
     if(activeControl === 'FirstPerson') controlMap.FirstPerson.update(delta);
+
+    if ( activeControl === 'PointerLock' && controlMap.PointerLock.isLocked ) {
+      pointerVelocity.x -= pointerVelocity.x * 10.0 * delta;
+      pointerVelocity.z -= pointerVelocity.z * 10.0 * delta;
+
+      pointerDirection.z = Number( pointerKeys.w ) - Number( pointerKeys.s );
+      pointerDirection.x = Number( pointerKeys.d ) - Number( pointerKeys.a );
+      pointerDirection.normalize();
+
+      if ( pointerKeys.w || pointerKeys.s ) pointerVelocity.z -= pointerDirection.z * 400.0 * delta;
+      if ( pointerKeys.a || pointerKeys.d ) pointerVelocity.x -= pointerDirection.x * 400.0 * delta;
+
+      controlMap.PointerLock.moveRight( -pointerVelocity.x * delta );
+      controlMap.PointerLock.moveForward( -pointerVelocity.z * delta );
+    }
 
     // PointerLockControls no necesita actualización en el loop, se maneja con eventos de mouse
     renderer.render(scene, camera);

@@ -359,6 +359,7 @@ seccion settings/configuracion
 
 /* Contenedor del control */
 #volumenControl {
+  appearance: none;
     -webkit-appearance: none;
     width: 300px;
     height: 8px;
@@ -431,7 +432,7 @@ panel new game
     line-height: 1.4;
 }
 
-#Instructions {
+#instructions {
     position: absolute;
     bottom: 300px;
     width: 300px;
@@ -445,7 +446,7 @@ panel new game
 }
 
 
-#Instructions h2 {
+#instructions h2 {
     margin: 0 0 10px 0;
     font-size: 18px;
 }
